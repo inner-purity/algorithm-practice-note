@@ -1,5 +1,7 @@
 package com.innerpurity.algorithm;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -48,7 +50,74 @@ public class Topic15 {
     }
 
     public static List<List<Integer>> threeSum(int[] nums) {
+        Arrays.sort(nums);
+        List<List<Integer>> result = new ArrayList<>();
+        for(int i = 0; i < nums.length; i++){
+            // 如果当前元素大于0
+            //或下一位元素与当前元素重复，则跳过。
+            if (i > 0 && nums[i] == nums[i - 1]) {
+                continue;
+            }
+            int target = -nums[i];
+            int left = i+1;
+            int right = nums.length-1;
+            while(left < right){
+                // 如果左右两数满足条件，封装成三元组返回
+                if(nums[left] + nums[right] == target){
+                    List<Integer> list = new ArrayList<>();
+                    list.add(nums[i]);
+                    list.add(nums[left]);
+                    list.add(nums[right]);
+                    result.add(list);
+                    // 更新双指针位置，方便下一轮查找。左右两个指针都越过重复元素，直到判断下一个元素不重复为止。
+                    // 注意，判断到最后时，不进行移动，只是说判断下一个不是重复元素就停止移动了，最后统一移动左右指针。
+                    // 这样就保证了三元组不重复。
+                    while(left < right && nums[left] == nums[left+1]){
+                        left++;
+                    }
+                    while(left < right && nums[right] == nums[right-1]){
+                        right--;
+                    }
+                    left++;
+                    right--;
+                    // 大了就让右数小点
+                }else if(nums[left] + nums[right] > target){
+                    right--;
+                    // 小了就让左数大点
+                }else{
+                    left++;
+                }
+            }
 
-        return null;
+        }
+        return result;
     }
+
+//            for (int i = 0; i < nums.length; i++) {
+//            if (nums[i] > 0) {
+//                return null;
+//            }
+//            if (i > 0 && nums[i] == nums[i - 1]) {
+//                continue;
+//            }
+//            int left = i + 1;
+//            int right = nums.length - 1;
+//            while (left < right) {
+//                int sum = nums[i] + nums[left] + nums[right];
+//                if (sum > 0) {
+//                    right--;
+//                } else if (sum < 0) {
+//                    left++;
+//                } else {
+//                    while (left < right && nums[left] == nums[left + 1]) {
+//                        left++;
+//                    }
+//                    while (left < right && nums[right] == nums[right - 1]) {
+//                        right--;
+//                    }
+//                    left++;
+//                    right--;
+//                }
+//            }
+//        }
 }
