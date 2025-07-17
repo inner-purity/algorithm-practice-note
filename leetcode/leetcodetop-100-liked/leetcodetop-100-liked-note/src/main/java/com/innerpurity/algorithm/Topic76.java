@@ -51,21 +51,7 @@ public class Topic76 {
     }
 
     public static int lengthOfLongestSubstring(String s) {
-        int[] map = new int[128];
-        int left = 0;
-        int right = 0;
-        int maxLen = 0;
-        while (right < s.length()) {
-            char c = s.charAt(right);
-            map[c]++;
-            right++;
-            while (map[c] > 1) {
-                char c1 = s.charAt(left);
-                map[c1]--;
-                left++;
-            }
-            maxLen = Math.max(maxLen, right - left);
-        }
-        return maxLen;
+
+        return 0;
     }
 }

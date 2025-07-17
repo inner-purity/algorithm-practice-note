@@ -48,7 +48,6 @@ public class Topic239 {
     }
 
     public static int[] maxSlidingWindow(int[] nums, int k) {
-
         return null;
     }
 }
